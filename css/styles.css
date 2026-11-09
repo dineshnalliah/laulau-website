@@ -91,46 +91,63 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.15; mar
   .nav li a { display: block; padding: 0.6rem 0.75rem; }
 }
 
-/* ---------- hero: the one bold moment ---------- */
-.hero { padding-block: clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 5rem); }
-.hero-grid {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(1.5rem, 4vw, 4rem); align-items: center;
+/* ---------- hero: full-width video ---------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex;
+  min-height: clamp(34rem, 80vh, 48rem);
+  background: var(--red);          /* shows while the video loads, or if it can't play */
+  color: #fff;
 }
-.lantern {
-  background: var(--red); color: var(--yolk); border-radius: 18px;
-  aspect-ratio: 4 / 5; position: relative; overflow: hidden;
-  display: grid; place-items: center;
+.hero-video {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: var(--video-focus, 50% 50%);   /* nudge framing, e.g. --video-focus: 50% 30% */
 }
-.lantern img { width: 68%; height: auto; }
-.lantern .chars {
-  position: absolute; right: 1.1rem; top: 1.25rem;
+/* Soft dark gradient for legibility, plus a whisper of brand red to keep it warm */
+.hero-scrim {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, rgba(28, 12, 8, 0.84) 0%, rgba(28, 12, 8, 0.46) 48%, rgba(28, 12, 8, 0.1) 100%),
+    rgba(196, 43, 30, 0.16);
+}
+
+/* Logo row and text sit in one column, so they can never overlap */
+.hero-inner {
+  width: 100%;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem;
+  padding-block: clamp(1.25rem, 3vw, 2rem) clamp(2rem, 5vw, 3.5rem);
+}
+.hero-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.seal { width: clamp(64px, 8vw, 96px); height: auto; border-radius: 10px; }
+.hero .chars {
   writing-mode: vertical-rl; font-family: var(--cjk); font-weight: 700;
-  font-size: clamp(1.1rem, 2.2vw, 1.5rem); letter-spacing: 0.35em; opacity: 0.9;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem); letter-spacing: 0.35em; color: var(--yolk);
 }
-.hero h1 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); max-width: 22ch; }
-.hero p.lede { color: var(--muted); max-width: 46ch; margin: 1.25rem 0 0; font-size: 1.125rem; }
 
-.status {
-  display: inline-flex; align-items: center; gap: 0.55rem;
-  margin-top: 2rem; font-weight: 500;
-}
-.status .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--muted); }
-.status[data-open="true"] .dot { background: #2f9e5b; }
-.status[data-open="false"] .dot { background: var(--red); }
+.hero-copy { max-width: 42rem; }
+.hero h1 { font-size: clamp(1.75rem, 3.8vw, 3rem); max-width: 22ch; text-shadow: 0 1px 24px rgba(0, 0, 0, 0.25); }
+.hero p.lede { color: rgba(255, 255, 255, 0.9); max-width: 46ch; margin: 1.25rem 0 0; font-size: 1.125rem; }
 
-.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+.status { display: inline-flex; align-items: center; gap: 0.55rem; margin: 1.75rem 0 0; font-weight: 500; }
+.status .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: rgba(255, 255, 255, 0.6); }
+.status[data-open="true"] .dot { background: #5fd18b; }
+.status[data-open="false"] .dot { background: #ff8a7a; }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.25rem; }
 .btn {
   display: inline-block; padding: 0.75rem 1.35rem; border-radius: 999px;
   font-weight: 600; text-decoration: none; border: 1.5px solid var(--ink);
 }
-.btn-solid { background: var(--ink); color: var(--paper); }
 .btn:hover { text-decoration: underline; }
+.hero .btn { color: #fff; border-color: rgba(255, 255, 255, 0.85); }
+.hero .btn-solid { background: #f7f6f2; color: #231f1c; border-color: #f7f6f2; }
+.hero :focus-visible { outline-color: #fff; }
 
-@media (max-width: 720px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .lantern { aspect-ratio: 16 / 10; }
-  .lantern img { width: 46%; }
+.video-toggle {
+  font: inherit; font-size: 0.9rem; color: #fff; background: none; border: 0;
+  padding: 0.75rem 0.5rem; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 0.2em;
 }
 
 /* ---------- marquee ---------- */

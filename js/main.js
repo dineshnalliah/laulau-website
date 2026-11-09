@@ -1,4 +1,4 @@
-/* Lau Lau homepage behavior: announcement bar, mobile nav, marquee fill, open/closed status */
+/* Lau Lau homepage behavior: announcement bar, hero video, mobile nav, marquee fill, open/closed status */
 
 // Mobile nav toggle
 (function () {
@@ -71,4 +71,51 @@
     bar.hidden = true;
     try { localStorage.setItem('ll-announce', 'closed'); } catch (e) {}
   });
+})();
+
+// Hero video: respects reduced-motion and data-saver, and gives a pause control
+(function () {
+  var video = document.getElementById('hero-video');
+  var btn = document.getElementById('video-toggle');
+  if (!video || !btn) return;
+
+  // Make a wrong file path obvious in the browser console (DevTools > Console)
+  Array.prototype.forEach.call(video.querySelectorAll('source'), function (s) {
+    s.addEventListener('error', function () {
+      console.warn('Hero video could not load: ' + s.getAttribute('src') +
+        ' (check that the file exists at this path, relative to index.html)');
+    });
+  });
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var conn = navigator.connection || {};
+
+  function label() { btn.textContent = video.paused ? 'play video' : 'pause video'; }
+  function reveal() { btn.hidden = false; label(); }
+
+  if (conn.saveData) {
+    video.removeAttribute('autoplay');
+    video.preload = 'none';
+    video.pause();
+  } else if (reduce.matches) {
+    video.pause();
+  }
+
+  // Only show the control once a video has actually loaded
+  if (video.readyState >= 2) reveal();
+  video.addEventListener('loadeddata', reveal);
+  video.addEventListener('play', label);
+  video.addEventListener('pause', label);
+
+  btn.addEventListener('click', function () {
+    if (video.paused) {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    } else {
+      video.pause();
+    }
+  });
+
+  var onChange = function (e) { if (e.matches) video.pause(); };
+  if (reduce.addEventListener) reduce.addEventListener('change', onChange);
 })();

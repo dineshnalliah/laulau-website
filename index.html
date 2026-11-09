@@ -52,6 +52,11 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
+<div class="announce" id="announce">
+  <p>✿ preorder your lau lau jade mug <a href="https://square.link/u/FZvaNSVw" target="_blank" rel="noopener">here</a> ! ◡̈ ✿</p>
+  <button type="button" aria-label="Dismiss announcement">×</button>
+</div>
+
 <header class="site-header">
   <div class="wrap">
     <a class="wordmark" href="/">lau lau</a>
@@ -60,7 +65,7 @@
       <ul id="nav-list">
         <li><a href="/menu">our menu</a></li>
         <li><a href="/events">events</a></li>
-        <li><a href="/our-story">our story</a></li>
+        <li><a href="#story">our story</a></li>
         <li><a href="/faq">faq</a></li>
       </ul>
     </nav>
@@ -68,16 +73,25 @@
 </header>
 
 <main id="main">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="lantern">
+  <section class="hero" aria-label="Welcome">
+    <!-- Decorative background video. Path is relative to this file: assets/working.mp4 -->
+    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto"
+           poster="assets/working-poster.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/working.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-top">
+        <img class="seal"
+             src="https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/d4e65254-ac67-46ab-bd2d-6e00af66b19d/LL_LOGO_STACK_YELLOWonRED.png?format=500w"
+             alt="Lau Lau logo" width="500" height="393">
         <span class="chars" lang="zh-Hans" aria-hidden="true">啡常友聚</span>
-        <img src="https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/d4e65254-ac67-46ab-bd2d-6e00af66b19d/LL_LOGO_STACK_YELLOWonRED.png?format=750w"
-             alt="Lau Lau logo" width="750" height="589">
       </div>
-      <div>
-        <h1>specialty coffee rooted in asian american culture and flavor.</h1>
-        <p class="lede">a coffee shop on guadalupe, named after my family, built to be a place where people feel safe and seen.</p>
+
+      <div class="hero-copy">
+        <h1>Lau Lau is a specialty coffee shop rooted in Asian American culture and flavor.</h1>
+        <p class="lede">Our mission is to build a community of intention and care that fosters a sense of belonging through a unique coffee experience.</p>
 
         <p class="status" id="status" aria-live="polite">
           <span class="dot" aria-hidden="true"></span>
@@ -87,6 +101,7 @@
         <div class="actions">
           <a class="btn btn-solid" href="/menu">see the menu</a>
           <a class="btn" href="https://maps.google.com/?q=Lau+Lau+3701+Guadalupe+St+Ste+106+Austin+TX" target="_blank" rel="noopener">get directions</a>
+          <!-- <button class="video-toggle" id="video-toggle" type="button" hidden>pause video</button> -->
         </div>
       </div>
     </div>
@@ -99,7 +114,7 @@
   </div>
   <p class="visually-hidden">glad you’re here</p>
 
-  <section class="block story" aria-labelledby="story-h">
+  <section class="block story" id="story" aria-labelledby="story-h">
     <div class="wrap story-grid">
       <img class="story-photo"
            src="https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/ca48502e-8f52-4777-8edf-3ea3138a4390/Cups-03.jpg?format=1000w"
@@ -107,16 +122,13 @@
                    https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/ca48502e-8f52-4777-8edf-3ea3138a4390/Cups-03.jpg?format=1000w 1000w,
                    https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/ca48502e-8f52-4777-8edf-3ea3138a4390/Cups-03.jpg?format=1500w 1500w"
            sizes="(max-width: 720px) 100vw, 50vw"
-           width="1000" height="600" loading="lazy"
+           width="1000" height="750" loading="lazy"
            alt="Lau Lau drinks lined up on the counter">
       <div>
         <h2 id="story-h">our story</h2>
-        <p class="pull">growing up in a biracial chinese american home in the midwest, folding wontons every holiday while drinking wisconsin old fashioneds, i’ve always had to find a balance between worlds.</p>
-        <p>Lau Lau celebrates the fusion of Asian and American cultures, and the idea that belonging is something we keep shaping together. That shows up in our specialty drinks, our pastries, and the cultural events we host.</p>
-        <p>We choose small, value-driven local vendors and approach every decision with a people-first mindset. For us, Lau Lau is more than coffee. It’s a step toward what the world could and should be.</p>
-        <p><a href="/our-story">read the full story</a></p>
-      </div>
-    </div>
+        <p>Named after my family, Lau Lau is deeply personal and grounded heavily in my own Chinese American experience. Growing up in a biracial Chinese-American home in the midwest, folding wontons every holiday while drinking Wisconsin Old Fashioneds, I’ve always had to find a balance between worlds and identities. Understanding that this feeling of “not enough one or the other” is a common sentiment, I’ve always dreamed of creating a space where people felt safe and seen in all their life experiences.</p>
+        <p>At Lau Lau, we proudly celebrate the fusion of Asian and American cultures while also acknowledging that the notions of culture and belonging are intricate and multidimensional. We embrace the fact that these concepts are constantly evolving, and we aim to be a space where we can <strong>reclaim and honor the richness of mixed heritage.</strong> For us, this means incorporating elements from my own Chinese heritage as well as the broader Asian diaspora, and infusing them into specialty drinks, pastries offerings, and cultural events.</p>
+        <a href="/about">read more</a>
   </section>
 
   <section class="block visit" aria-labelledby="visit-h">
@@ -148,7 +160,7 @@
         </div>
         <div>
           <h3>what’s happening</h3>
-          <p>pop-ups, workshops, and cultural nights happen often. the latest is always on our events page and instagram.</p>
+          <p>We host cultural events alongside the coffee. See what’s coming up on our events page.</p>
           <p><a href="/events">see upcoming events</a></p>
         </div>
       </div>
@@ -158,7 +170,7 @@
   <section class="block" aria-labelledby="community-h">
     <div class="wrap">
       <h2 id="community-h">who we stand with</h2>
-      <p class="muted-copy">we use our platform to support organizations working for a more just austin and world.</p>
+      <p class="muted-copy">We’re committed to using our platform to drive meaningful change.</p>
       <div class="community">
         <a href="https://www.goodworkaustin.org/" target="_blank" rel="noopener">
           <img src="https://images.squarespace-cdn.com/content/v1/66fb0c9f7e0c2a7a3ded0a88/990f0138-5257-42cd-8bfc-73c8702c881c/GWA_Web_Decal%2B%282%29+%281%29.png?format=300w" alt="" width="64" height="64" loading="lazy">
